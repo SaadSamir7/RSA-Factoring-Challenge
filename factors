@@ -2,26 +2,21 @@
 
 import sys
 
-def factorize(n):
-    factors = []
-    i = 2
-    while i * i <= n:
-        if n % i:
-            i += 1
-        else:
-            n //= i
-            factors.append(i)
-    if n > 1:
-        factors.append(n)
-    return factors
 
-def is_prime(num):
-    if num < 2:
-        return False
-    for i in range(2, int(num**0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
+def factorize(value):
+    i = 2
+    if value < 2:
+        return
+
+    while value % i:
+        i += 1
+
+    print()
+    print(value, "<- value-bef")
+    print("{:.0f}={:.0f}*{:.0f}".format(value, value / i, i))
+    print(value, "<- value-aft")
+    print()
+
 
 if len(sys.argv) != 2:
     print("Usage: factors <file>")
@@ -32,19 +27,9 @@ input_file = sys.argv[1]
 try:
     with open(input_file, "r") as file:
         for line in file:
-            num = int(line)
-            factors = factorize(num)
-            if len(factors) == 2:
-                p, q = factors
-                print(f"{num}={p}*{q}")
-            else:
-                for i in range(2, num + 1):
-                    if num % i == 0:
-                        p = i
-                        q = num // i
-                        print(f"{num}={p}*{q}")
-                        break
+            num = int(line.strip())
+            factorize(num)
 except FileNotFoundError:
     print(f"File '{input_file}' not found.")
 except ValueError:
-    print("Invalid input in the file. Make sure all lines are valid natural numbers greater than 1.")
+    print("Invalid input in the file.valid natural numbers greater than 1.")
