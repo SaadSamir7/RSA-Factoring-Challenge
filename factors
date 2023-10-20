@@ -1,35 +1,35 @@
 #!/usr/bin/python3
 
-import sys
-
-
 def factorize(value):
     i = 2
+
     if value < 2:
         return
 
-    while value % i:
-        i += 1
-
     print()
     print(value, "<- value-bef")
+    while value % i:
+        i += 1
     print("{:.0f}={:.0f}*{:.0f}".format(value, value / i, i))
     print(value, "<- value-aft")
     print()
 
 
-if len(sys.argv) != 2:
-    print("Usage: factors <file>")
-    sys.exit(1)
+if __name__ == "__main__":
+    import sys
 
-input_file = sys.argv[1]
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        sys.exit(1)
 
-try:
-    with open(input_file, "r") as file:
-        for line in file:
-            num = int(line.strip())
-            factorize(num)
-except FileNotFoundError:
-    print(f"File '{input_file}' not found.")
-except ValueError:
-    print("Invalid input in the file.valid natural numbers greater than 1.")
+    input_file = sys.argv[1]
+
+    try:
+        with open(input_file, "r") as file:
+            for line in file:
+                num = int(line.strip())
+                factorize(num)
+    except FileNotFoundError:
+        print(f"File '{input_file}' not found.")
+    except ValueError:
+        print("Invalid input in the file.valid natural numbers greater than 1")
